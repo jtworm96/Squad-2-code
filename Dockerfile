@@ -1,8 +1,6 @@
 FROM registry.access.redhat.com/ubi8/nodejs-14
 # version set
 
-CMD [ "npm", "start" ]
-
 WORKDIR /opt/app-root/src
 
 # ADD app-src .
@@ -11,11 +9,27 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install
+
+WORKDIR /opt/app-root
 
 RUN npm run build-prod
 
 COPY dist .
+
+CMD [ "npm", "start" ]
+
+
+# FROM registry.access.redhat.com/ubi8/nodejs-14
+# WORKDIR /opt/app-root/src
+# COPY . .
+# RUN npm install
+# EXPOSE 3000
+# CMD [ "npm", "start" ]
+
+
+
+
 
 # FROM registry.access.redhat.com/ubi8/nodejs-14 AS builder
 
