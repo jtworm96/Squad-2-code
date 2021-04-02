@@ -13,20 +13,32 @@ class List extends React.Component {
 
   render () {
     return (
-      <>
+      <div id="container">
+        <div id="listName">Grocery List</div>
         <div id='list'>
-          <h1>Grocery List</h1>
-          {this.props.groceryList.map((item, i) =>
-            <ListEntry 
-              key={i}
-              item={item} 
-              index={i}
-              deleteListItem={this.props.deleteListItem}
+          <center>
+            <div id="title">
+                <div className="labels"></div>
+                <div className="labels">Qty</div>
+                <div className="labels">Unit</div>
+                <div className="labels">Item</div>
+            </div>
+            <div id="divEntries">
+                {this.props.groceryList.map((item, i) =>
+                    <ListEntry 
+                    key={i}
+                    item={item} 
+                    index={i}
+                    deleteListItem={this.props.deleteListItem}
+                    />
+                )}
+            </div>
+            <NewItemForm
+                addListItem={this.props.addListItem}
             />
-          )}
-          <NewItemForm /> 
+          </center>
         </div>
-      </>
+      </div>
     )
   }
 }
